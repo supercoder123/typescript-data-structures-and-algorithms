@@ -1,1 +1,1 @@
-import './LinkedList/LinkedList';
+import './DataStructures/LinkedList/LinkedList';

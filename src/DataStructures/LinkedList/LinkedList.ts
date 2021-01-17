@@ -1,6 +1,6 @@
-import { List } from '../Types/List';
+import { List } from '../../Types/List';
 import LinkedListNode from './LinkedListNode';
-import { listToString } from '../Utils';
+import { listToString } from '../../Utils';
 
 class LinkedList<T> implements List<T> {
     head: LinkedListNode<T>;

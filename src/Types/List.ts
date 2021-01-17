@@ -1,11 +1,10 @@
-// interface ListUtils<T, N> {
-//     find(value: T): N;
-// }
+import LinkedListNode from "../DataStructures/LinkedList/LinkedListNode";
 
 export interface List<T>{
     append(value: T): void;
     prepend(value: T): void;
-    // insert(nodeValue: T, value: T): void;
-    // find(value: T): LinkedListNode<T>;
+    insert(nodeValue: LinkedListNode<T>, value: T): void;
+    find(value: T): LinkedListNode<T>;
+    delete(value: T): void;
     print?: () => void;
 }
