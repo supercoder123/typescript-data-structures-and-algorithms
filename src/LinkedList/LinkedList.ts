@@ -42,7 +42,7 @@ class LinkedList<T> implements List<T> {
     }
 
     // insert at some point in between the list 
-    insert(node: LinkedListNode<T> , value: T): LinkedList<T> {
+    insert(node: LinkedListNode<T>, value: T): LinkedList<T> {
         if (!this.head) {
             this.prepend(value);
             return;
@@ -52,7 +52,7 @@ class LinkedList<T> implements List<T> {
             this.append(value);
             return;
         }
-        const newNode = new LinkedListNode(value);   
+        const newNode = new LinkedListNode(value);
         newNode.value = value;
         newNode.next = node.next;
         node.next = newNode;
@@ -65,7 +65,7 @@ class LinkedList<T> implements List<T> {
             return null;
         }
         let current = this.head;
-        while(current) {
+        while (current) {
             if (current.value === value) {
                 return current;
             }
@@ -88,7 +88,7 @@ class LinkedList<T> implements List<T> {
                     // value to be found is the head 
                     this.head = this.head.next;
                 } else {
-                    previous.next =  current.next;
+                    previous.next = current.next;
                 }
                 break;
             } else {
@@ -102,7 +102,18 @@ class LinkedList<T> implements List<T> {
 
     reverse(): void {
         let current = this.head;
+        let previous = null;
+        let next = null;
 
+        while (current) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        this.tail = this.head;
+        this.head = previous;
+        return previous;
     }
 
     print(): void {
@@ -122,19 +133,20 @@ class LinkedList<T> implements List<T> {
 const list = new LinkedList<number>();
 
 list.append(3)
-.append(4)
-.append(5)
-.prepend(44)
-.prepend(7)
-.prepend(79)
-.append(53)
-.insert(list.find(79), 89);
+    .append(4)
+    .append(5)
+    .prepend(44)
+    .prepend(7)
+    .prepend(79)
+    .append(53)
+    .insert(list.find(79), 89);
 
 list.print();
 
 list.delete(79);
 list.delete(53);
 list.delete(44);
+list.reverse();
 
 console.log(list.find(79));
 // console.log(list)
