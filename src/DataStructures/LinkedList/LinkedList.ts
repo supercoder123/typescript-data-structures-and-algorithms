@@ -2,7 +2,7 @@ import { List } from '../../Types/List';
 import LinkedListNode from './LinkedListNode';
 import { listToString } from '../../Utils';
 
-class LinkedList<T> implements List<T> {
+export default class LinkedList<T> implements List<T> {
     head: LinkedListNode<T>;
     tail: LinkedListNode<T>;
     length: number;
@@ -116,16 +116,23 @@ class LinkedList<T> implements List<T> {
         return previous;
     }
 
-    print(): void {
+    toArray(): T[] {
+        const nodes: T[] = [];
         let current = this.head;
-        let str = listToString();
-        let finalValue = '';
-        while (current !== null) {
-            finalValue = str(current.value);
+        while(current) {
+            nodes.push(current.value);
             current = current.next;
         }
-        console.log("Linked List: ", finalValue);
+        return nodes;
+    }
+
+    print(): void {
+        console.log("Linked List: ", this.toArray());
         console.log("Length:", this.length);
+    }
+
+    toString(): string {
+        return this.toArray().join(',');
     }
 }
 
@@ -147,7 +154,6 @@ list.delete(79);
 list.delete(53);
 list.delete(44);
 list.reverse();
-
-console.log(list.find(79));
 // console.log(list)
 list.print();
+console.log(list.toString());
