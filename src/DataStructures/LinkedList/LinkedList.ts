@@ -60,12 +60,15 @@ export default class LinkedList<T> implements List<T> {
         return this;
     }
 
-    find(value: T): LinkedListNode<T> {
+    find(value: T, callback?: (value) => boolean): LinkedListNode<T> {
         if (!this.head) {
             return null;
         }
         let current = this.head;
         while (current) {
+            if (callback && callback(current)) {
+                return current;
+            }
             if (current.value === value) {
                 return current;
             }
@@ -78,6 +81,7 @@ export default class LinkedList<T> implements List<T> {
         if (!this.head) {
             return null;
         }
+        console.log('afsdasdf==========',  value)
 
         let current = this.head;
         let previous: LinkedListNode<T> = null;
@@ -86,7 +90,11 @@ export default class LinkedList<T> implements List<T> {
             if (current.value === value) {
                 if (!previous) {
                     // value to be found is the head 
+                    if (this.head === this.tail) {
+                        this.tail = this.tail.next;
+                    }
                     this.head = this.head.next;
+
                 } else {
                     previous.next = current.next;
                 }
@@ -96,6 +104,7 @@ export default class LinkedList<T> implements List<T> {
                 current = current.next;
             }
         }
+
         this.length--;
         return this;
     }
