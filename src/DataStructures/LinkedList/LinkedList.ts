@@ -81,7 +81,6 @@ export default class LinkedList<T> implements List<T> {
         if (!this.head) {
             return null;
         }
-        console.log('afsdasdf==========',  value)
 
         let current = this.head;
         let previous: LinkedListNode<T> = null;
