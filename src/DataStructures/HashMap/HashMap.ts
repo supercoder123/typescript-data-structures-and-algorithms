@@ -1,5 +1,6 @@
 import LinkedList  from '../LinkedList/LinkedList';
 
+// hash map implementaion using linked lists
 class HashMap {
     public buckets: LinkedList<{key: string, value: any}>[];
 

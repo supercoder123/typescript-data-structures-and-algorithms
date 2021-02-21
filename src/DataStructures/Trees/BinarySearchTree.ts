@@ -42,7 +42,7 @@ class BinarySearchTree<T> {
         return this;
     }
 
-    insertRecursiveHelper(node:TreeNode<T>, value: T): TreeNode<T> {
+    private insertRecursiveHelper(node:TreeNode<T>, value: T): TreeNode<T> {
         if (node === null) {
             return new TreeNode(value);
         } else if (value < node.value) {
@@ -54,9 +54,46 @@ class BinarySearchTree<T> {
         }
     }
 
-    // delete(): void {
+    deleteNode(value): void {
+        this.root = this.delete(this.root, value);
+    }
 
-    // }
+    private delete(node, value) {
+        // first find the node to be deleted
+        if (!node) {
+            return this.root;
+        } else if (value < node.value) {
+            node.left = this.delete(node.left, value);
+            return node;
+        } else if (value > node.value) {
+            node.right = this.delete(node.right, value);
+            return node;
+        } else {
+            // node is found
+            // no children
+            if (node.left === null && node.right === null) {
+                return null;
+            } else if (node.left === null) {  //  right child exists
+                return node.right;
+            } else if  (node.right === null) { // left child exists
+                return node.left;
+            } else {  // both children exist
+                let temp = this.getSmallestNode(node.right);
+                node.value = temp.value;
+                node.right = this.delete(node.right, temp.value);
+                return node;
+            }
+        }
+    }
+
+    // get the smallest node of the right subtree
+    // Alternate logic: get largest node of left subtree
+    private getSmallestNode(node) {
+        while(node.left !== null) {
+            node = node.left;
+        }
+        return node;
+    }
 
     find(value): TreeNode<T> {
         if (!this.root) {
@@ -75,6 +112,15 @@ class BinarySearchTree<T> {
         return null;
     }
 
+    findRecursive() {
+
+    }
+
+    findRecursiveHelper() {
+        
+    }
+
+
     traverse(traversalCallback): T[] {
         const nodesVisited: T[] = [];
         traversalCallback(this.root, nodesVisited);
@@ -89,7 +135,7 @@ class BinarySearchTree<T> {
         }
     }
 
-     preOrderTraversal = (node, nodesVisited) => {
+    preOrderTraversal = (node, nodesVisited) => {
         if (node) {
             nodesVisited.push(node.value);
             this.preOrderTraversal(node.left, nodesVisited);
@@ -105,9 +151,10 @@ class BinarySearchTree<T> {
         }
     }
 
-    // exists():  boolean {
-
-    // }
+    exists(value):  boolean {
+        const node = this.find(value);
+        return node ? true  : false;
+    }
 }
 
 const bst = new BinarySearchTree();
@@ -116,10 +163,15 @@ bst.insert(10)
 bst.insert(5)
 bst.insert(50)
 bst.insert(60);
+bst.insert(30);
+bst.insert(90);
+bst.insert(2);
+
+bst.deleteNode(20);
 console.log(bst.traverse(bst.inOrderTraversal));
 console.log(bst.traverse(bst.preOrderTraversal));
 console.log(bst.traverse(bst.postOrderTraversal));
 
-console.log(bst.find(50));
-console.log(bst);
+console.log(bst.exists(90));
+console.log(bst.root);
 
