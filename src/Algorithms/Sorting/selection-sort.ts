@@ -1,4 +1,4 @@
-export function selectionSort(array) {
+export function selectionSort(array: number[]) {
     for (let i = 0; i < array.length; i++) {
         let minIndex = i;
         for (let j = i + 1; j < array.length; j++) {
@@ -11,4 +11,4 @@ export function selectionSort(array) {
     return array;
 }
 
-console.log(selectionSort([4,3,6, 5, 4,7,8,2,9]));
+console.log(selectionSort([4, 3, 6, 5, 4, 7, 8, 2, 9]));

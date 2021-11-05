@@ -1,8 +1,7 @@
-import { List } from '../../Types/List';
+import { IList } from '../../types/List';
 import LinkedListNode from './LinkedListNode';
-import { listToString } from '../../Utils';
 
-export default class LinkedList<T> implements List<T> {
+export default class LinkedList<T> implements IList<T> {
     head: LinkedListNode<T>;
     tail: LinkedListNode<T>;
     length: number;
@@ -13,7 +12,6 @@ export default class LinkedList<T> implements List<T> {
         this.length = 0;
     }
 
-    // insert before the list 
     append(value: T): LinkedList<T> {
         const newNode = new LinkedListNode(value);
         if (!this.head) {
@@ -45,12 +43,12 @@ export default class LinkedList<T> implements List<T> {
     insert(node: LinkedListNode<T>, value: T): LinkedList<T> {
         if (!this.head) {
             this.prepend(value);
-            return;
+            return this;
         }
         // check if the given node is tail
         if (node.next === null) {
             this.append(value);
-            return;
+            return this;
         }
         const newNode = new LinkedListNode(value);
         newNode.value = value;
@@ -60,13 +58,13 @@ export default class LinkedList<T> implements List<T> {
         return this;
     }
 
-    find(value: T, callback?: (value) => boolean): LinkedListNode<T> {
+    find(value: unknown, callback?: (value: unknown) => boolean): LinkedListNode<T> {
         if (!this.head) {
             return null;
         }
         let current = this.head;
         while (current) {
-            if (callback && callback(current)) {
+            if (callback && callback(current.value)) {
                 return current;
             }
             if (current.value === value) {
@@ -108,7 +106,7 @@ export default class LinkedList<T> implements List<T> {
         return this;
     }
 
-    reverse(): void {
+    reverse(): LinkedListNode<T> {
         let current = this.head;
         let previous = null;
         let next = null;
@@ -127,7 +125,7 @@ export default class LinkedList<T> implements List<T> {
     toArray(): T[] {
         const nodes: T[] = [];
         let current = this.head;
-        while(current) {
+        while (current) {
             nodes.push(current.value);
             current = current.next;
         }

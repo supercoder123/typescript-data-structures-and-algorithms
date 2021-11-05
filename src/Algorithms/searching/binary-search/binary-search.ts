@@ -1,10 +1,10 @@
 // O(logN) worst case
 // O(1) best case
-export function binarySearch(array, key) {
+export function binarySearch(array: number[], key: number): number {
     let start = 0;
     let end = array.length - 1;
     let middle = Math.floor((start + end) / 2);
-    while(start <= end) {
+    while (start <= end) {
         if (array[middle] === key) {
             return middle;
         }

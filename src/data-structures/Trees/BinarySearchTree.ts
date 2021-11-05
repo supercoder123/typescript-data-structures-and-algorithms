@@ -1,7 +1,9 @@
 import { TreeNode } from "./TreeNode";
 
+type traversalCallback<T> = (node: TreeNode<T>, nodesVisited: T[]) => void;
+
 class BinarySearchTree<T> {
-    public root;
+    public root: TreeNode<T>;
 
     constructor() {
         this.root = null;
@@ -15,6 +17,7 @@ class BinarySearchTree<T> {
         }
 
         let current = this.root;
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             if (value === current.value) {
                 return this;
@@ -37,12 +40,12 @@ class BinarySearchTree<T> {
         }
     }
 
-    insertRecursive(value) {
+    insertRecursive(value: T) {
         this.root = this.insertRecursiveHelper(this.root, value);
         return this;
     }
 
-    private insertRecursiveHelper(node:TreeNode<T>, value: T): TreeNode<T> {
+    private insertRecursiveHelper(node: TreeNode<T>, value: T): TreeNode<T> {
         if (node === null) {
             return new TreeNode(value);
         } else if (value < node.value) {
@@ -54,11 +57,11 @@ class BinarySearchTree<T> {
         }
     }
 
-    deleteNode(value): void {
+    deleteNode(value: T): void {
         this.root = this.delete(this.root, value);
     }
 
-    private delete(node, value) {
+    private delete(node: TreeNode<T>, value: T) {
         // first find the node to be deleted
         if (!node) {
             return this.root;
@@ -75,10 +78,10 @@ class BinarySearchTree<T> {
                 return null;
             } else if (node.left === null) {  //  right child exists
                 return node.right;
-            } else if  (node.right === null) { // left child exists
+            } else if (node.right === null) { // left child exists
                 return node.left;
             } else {  // both children exist
-                let temp = this.getSmallestNode(node.right);
+                const temp = this.getSmallestNode(node.right);
                 node.value = temp.value;
                 node.right = this.delete(node.right, temp.value);
                 return node;
@@ -88,22 +91,22 @@ class BinarySearchTree<T> {
 
     // get the smallest node of the right subtree
     // Alternate logic: get largest node of left subtree
-    private getSmallestNode(node) {
-        while(node.left !== null) {
+    private getSmallestNode(node: TreeNode<T>) {
+        while (node.left !== null) {
             node = node.left;
         }
         return node;
     }
 
-    find(value): TreeNode<T> {
+    find(value: T): TreeNode<T> {
         if (!this.root) {
             return null;
         }
         let current = this.root;
-        while(current) {
+        while (current) {
             if (value < current.value) {
                 current = current.left;
-            } else if(value > current.value) {
+            } else if (value > current.value) {
                 current = current.right;
             } else {
                 return current;
@@ -112,22 +115,22 @@ class BinarySearchTree<T> {
         return null;
     }
 
-    findRecursive() {
+    // findRecursive() {
 
-    }
+    // }
 
-    findRecursiveHelper() {
-        
-    }
+    // findRecursiveHelper() {
+
+    // }
 
 
-    traverse(traversalCallback): T[] {
+    traverse(traversalCallback: traversalCallback<T>): T[] {
         const nodesVisited: T[] = [];
         traversalCallback(this.root, nodesVisited);
         return nodesVisited;
     }
 
-    inOrderTraversal = (node, nodesVisited) => {
+    inOrderTraversal: traversalCallback<T> = (node, nodesVisited) => {
         if (node) {
             this.inOrderTraversal(node.left, nodesVisited);
             nodesVisited.push(node.value);
@@ -135,7 +138,7 @@ class BinarySearchTree<T> {
         }
     }
 
-    preOrderTraversal = (node, nodesVisited) => {
+    preOrderTraversal: traversalCallback<T> = (node, nodesVisited) => {
         if (node) {
             nodesVisited.push(node.value);
             this.preOrderTraversal(node.left, nodesVisited);
@@ -143,7 +146,7 @@ class BinarySearchTree<T> {
         }
     }
 
-    postOrderTraversal = (node, nodesVisited) => {
+    postOrderTraversal: traversalCallback<T> = (node, nodesVisited) => {
         if (node) {
             this.postOrderTraversal(node.left, nodesVisited);
             this.postOrderTraversal(node.right, nodesVisited);
@@ -151,9 +154,9 @@ class BinarySearchTree<T> {
         }
     }
 
-    exists(value):  boolean {
+    exists(value: T): boolean {
         const node = this.find(value);
-        return node ? true  : false;
+        return node ? true : false;
     }
 }
 

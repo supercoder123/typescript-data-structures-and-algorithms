@@ -1,6 +1,6 @@
-// import './DataStructures/LinkedList/LinkedList';
-// import './DataStructures/Queue/Queue';
-// import './DataStructures/Stack/Stack';
-// import './DataStructures/HashMap/HashMap';
-// import './DataStructures/Trees/BinarySearchTree';
-import './Algorithms/Sorting';
+import './data-structures/LinkedList/LinkedList';
+import './data-structures/Queue/Queue';
+import './data-structures/Stack/Stack';
+import './data-structures/HashMap/HashMap';
+import './data-structures/Trees/BinarySearchTree';
+import './algorithms/sorting';
