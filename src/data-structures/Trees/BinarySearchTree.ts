@@ -2,7 +2,20 @@ import { TreeNode } from "./TreeNode";
 
 type traversalCallback<T> = (node: TreeNode<T>, nodesVisited: T[]) => void;
 
-class BinarySearchTree<T> {
+/**
+ * 
+> A binary search tree (or BST) is a binary tree in which each node (except leaf nodes) satisfies the
+following rules:
+- all values of the right subtree of a node must be greater than the node value itself,
+- all values of the left subtree of a node must be less than the node value itself.
+
+The leaf nodes children are null therefore we’re not applying these rules to them.
+
+| Access | Search | Insertion | Deletion | Comment |
+|-------|-------|-------|-------|-------|
+| O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) | For balanced trees |
+ */
+export class BinarySearchTree<T> {
     public root: TreeNode<T>;
 
     constructor() {
@@ -26,16 +39,14 @@ class BinarySearchTree<T> {
                 if (!current.left) {
                     current.left = newNode;
                     return this;
-                } else {
-                    current = current.left;
                 }
+                current = current.left;
             } else {
                 if (!current.right) {
                     current.right = newNode;
                     return this;
-                } else {
-                    current = current.right;
                 }
+                current = current.right;
             }
         }
     }
@@ -57,6 +68,17 @@ class BinarySearchTree<T> {
         }
     }
 
+
+    /**
+     * > ### Deleting a node cases:
+     * ---
+     * - Removing a leaf node - most straightforward case, we remove the node.
+        - Removing a node with one child - we make the child node become a child node for the current
+        node’s parent
+        - Removing the node with two children - we need to find the next largest value (minimum
+        value in the right branch) (inorder successor) and replace current node with that next largest value node.
+        ---
+     */
     deleteNode(value: T): void {
         this.root = this.delete(this.root, value);
     }
@@ -89,10 +111,20 @@ class BinarySearchTree<T> {
         }
     }
 
-    // get the smallest node of the right subtree
-    // Alternate logic: get largest node of left subtree
+    /** 
+     * Get the smallest node of the right subtree
+     * 
+     * Alternate logic: get largest node of left subtree
+    */
     private getSmallestNode(node: TreeNode<T>) {
-        while (node.left !== null) {
+        while (node.left) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    private getLargestNode(node: TreeNode<T>) {
+        while (node.right) {
             node = node.left;
         }
         return node;
@@ -115,15 +147,34 @@ class BinarySearchTree<T> {
         return null;
     }
 
-    // findRecursive() {
+    findRecursive(value: T): TreeNode<T> {
+        if (!this.root) {
+            return null;
+        }
+        return this.findRecursiveHelper(this.root, value);
+    }
 
-    // }
+    findRecursiveHelper(node: TreeNode<T>, value: T): TreeNode<T> {
+        if (node.value === value) {
+            return node;
+        } else if (value < node.value && node.left) {
+            return this.findRecursiveHelper(node.left, value);
+        } else if (value > node.value && node.right) {
+            return this.findRecursiveHelper(node.right, value);
+        }
+    }
 
-    // findRecursiveHelper() {
 
-    // }
-
-
+    /**
+     * 
+     * > ### How to remember traversals
+     * ---
+     * - Let L be left subtree/child , R be right subtree/child and P be the parent node of L and R
+     * - Now for postorder P is after(post) L & R so it becomes -> L R P
+     * - for preorder P is before(pre) L & R so it becomes -> P L R
+     * - for Inorder P is Inbetween(IN) L & R , so it becomes -> L P R.
+     * ---
+     */
     traverse(traversalCallback: traversalCallback<T>): T[] {
         const nodesVisited: T[] = [];
         traversalCallback(this.root, nodesVisited);
@@ -177,4 +228,6 @@ console.log(bst.traverse(bst.postOrderTraversal));
 
 console.log(bst.exists(90));
 console.log(bst.root);
+console.log(bst.findRecursive(5));
+console.log(bst.find(5));
 

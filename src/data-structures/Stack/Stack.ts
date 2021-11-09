@@ -1,5 +1,5 @@
-import LinkedListNode from '../LinkedList/LinkedListNode';
-class Stack<T> {
+import { LinkedListNode } from '../LinkedList/LinkedListNode';
+export class Stack<T> {
     public top: LinkedListNode<T>;
     public length: number;
 
@@ -10,7 +10,7 @@ class Stack<T> {
 
     push(value: T): void {
         const newNode = new LinkedListNode(value);
-        if (!this.top) {    
+        if (!this.top) {
             this.top = newNode;
         } else {
             newNode.next = this.top;
@@ -33,11 +33,11 @@ class Stack<T> {
     }
 
     peek(): T {
-        return this.top ? this.top.value : null; 
+        return this.top ? this.top.value : null;
     }
 
     isEmpty(): boolean {
-        return !this.top; 
+        return !this.top;
     }
 
     toArray(): T[] {

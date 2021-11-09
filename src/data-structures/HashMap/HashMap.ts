@@ -1,10 +1,10 @@
-import LinkedList from '../LinkedList/LinkedList';
+import { LinkedList } from '../LinkedList/LinkedList';
 
 type HashMapElement = { key: string, value: unknown };
 type HashMapElementValue = HashMapElement['value'];
 
 // hash map implementaion using linked lists
-class HashMap {
+export class HashMap {
     public buckets: LinkedList<HashMapElement>[];
 
     constructor(public size = 53) {

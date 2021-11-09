@@ -1,7 +1,7 @@
-import LinkedListNode from '../LinkedList/LinkedListNode';
+import { LinkedListNode } from '../LinkedList/LinkedListNode';
 
 /* using linkedlist to implement queue*/
-class Queue<T> {
+export class Queue<T> {
     public first: LinkedListNode<T>;
     public last: LinkedListNode<T>;
     public length: number;

@@ -1,5 +1,13 @@
-// O(logN) worst case
-// O(1) best case
+/**
+ * 
+ * 
+ * ```text
+ * O(logN) // worst case 
+ * 
+ * O(1) // best case
+ * ```  
+ * 
+ */
 export function binarySearch(array: number[], key: number): number {
     let start = 0;
     let end = array.length - 1;

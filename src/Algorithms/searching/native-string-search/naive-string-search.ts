@@ -1,7 +1,10 @@
-// How many times does a substring appear in a string?
-// This is a naive way, not the best approach
-
-function naiveStringSearch(str: string, substr: string) {
+/**  
+ * ```text
+ * How many times does a substring appear in a string?
+ * This is a naive way, not the best approach
+ * ```
+*/
+export function naiveStringSearch(str: string, substr: string) {
     let matches = 0;
     for (let i = 0; i < str.length; i++) {
         for (let j = 0; j < substr.length; j++) {

@@ -1,4 +1,4 @@
-import LinkedListNode from "../data-structures/LinkedList/LinkedListNode";
+import { LinkedListNode } from "../data-structures/LinkedList/LinkedListNode";
 
 export interface IList<T> {
     append(value: T): void;

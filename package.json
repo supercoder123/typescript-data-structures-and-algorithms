@@ -1,12 +1,12 @@
 {
-  "name": "ts",
+  "name": "ts-dsa",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "parcel index.html",
-    "generate-docs": "typedoc --entryPointStrategy expand --emit none --out docs src"
+    "test": "jest --watch",
+    "start": "ts-node src",
+    "generate-docs": "typedoc --theme default --out docs src"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,10 @@
 import { IList } from '../../types/List';
-import LinkedListNode from './LinkedListNode';
+import { LinkedListNode } from './LinkedListNode';
 
-export default class LinkedList<T> implements IList<T> {
+/**
+ * Linked List
+ */
+export class LinkedList<T> implements IList<T> {
     head: LinkedListNode<T>;
     tail: LinkedListNode<T>;
     length: number;
@@ -141,25 +144,3 @@ export default class LinkedList<T> implements IList<T> {
         return this.toArray().join(',');
     }
 }
-
-
-const list = new LinkedList<number>();
-
-list.append(3)
-    .append(4)
-    .append(5)
-    .prepend(44)
-    .prepend(7)
-    .prepend(79)
-    .append(53)
-    .insert(list.find(79), 89);
-
-list.print();
-
-list.delete(79);
-list.delete(53);
-list.delete(44);
-list.reverse();
-// console.log(list)
-list.print();
-console.log(list.toString());
