@@ -1,6 +1,13 @@
 import { Comparator } from "../../Utils/Comparator";
 import { MaxHeap } from "../Heap/MaxHeap";
 
+/**
+ * Priority Queue implementation using Max Heap
+ * 
+ * |Peek |Poll |Add |Remove|
+ * |-----|-----|-----|-----|
+ * |O(1) |O(log(n)) |O(log(n)) |O(log(n))|
+ */
 export class PriorityQueue<T> extends MaxHeap<T> {
     public priorities;
     constructor() {

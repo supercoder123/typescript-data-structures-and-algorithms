@@ -1,18 +1,18 @@
 /**
  * A binary heap is a binary tree which also satisfies two additional constraints:
-- **Shape property**: a binary heap is a complete binary tree; that is, all levels of the tree, except
-possibly the last one (deepest) are completely filled, and, if the last level of the tree is not
-complete, the nodes of that level are filled from left to right.
-- **Heap property**: if P is a parent node of child node C, then the value of P is either greater than
-or equal to (in a max heap) or less than or equal to (in a min heap) the key of C.
-|Peek | Poll | Add | Remove|
-|-----|-----|-----|-----|
-| O(1) | O(log(n)) | O(log(n)) | O(log(n)) |
-
-If the tree root is at index 0, with valid indices 0 through n − 1, then each element
-a at index i has:
-- children at indices 2i + 1 and 2i + 2,
-- its parent at index floor((i − 1) / 2)
+ * - **Shape property**: a binary heap is a complete binary tree; that is, all levels of the tree, except
+ * possibly the last one (deepest) are completely filled, and, if the last level of the tree is not
+ * complete, the nodes of that level are filled from left to right.
+ * - **Heap property**: if P is a parent node of child node C, then the value of P is either greater than
+ * or equal to (in a max heap) or less than or equal to (in a min heap) the key of C.
+ * |Peek | Poll | Add | Remove|
+ * |-----|-----|-----|-----|
+ * | O(1) | O(log(n)) | O(log(n)) | O(log(n)) |
+ * 
+ * If the tree root is at index 0, with valid indices 0 through n − 1, then each element
+ * a at index i has:
+ * - children at indices 2i + 1 and 2i + 2,
+ * - its parent at index floor((i − 1) / 2)
 */
 
 import { Comparator } from "../../Utils/Comparator";

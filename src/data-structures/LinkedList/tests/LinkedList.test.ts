@@ -31,21 +31,4 @@ describe('LinkedList', () => {
         expect(list.toArray()).toEqual([3, 44, 55]);
     });
 
-})
-
-//     .append(5)
-//     .prepend(44)
-//     .prepend(7)
-//     .prepend(79)
-//     .append(53)
-//     .insert(list.find(79), 89);
-
-// list.print();
-
-// list.delete(79);
-// list.delete(53);
-// list.delete(44);
-// list.reverse();
-// // console.log(list)
-// list.print();
-// console.log(list.toString());
+});

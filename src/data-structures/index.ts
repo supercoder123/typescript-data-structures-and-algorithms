@@ -1,3 +1,5 @@
+export { Graph } from './Graph/Graph';
+export { PriorityQueue } from './PriorityQueue/PriorityQueue';
 export { MinHeap } from './Heap/MinHeap';
 export { Heap } from './Heap/Heap';
 export { MaxHeap } from './Heap/MaxHeap';

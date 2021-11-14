@@ -4,16 +4,16 @@ type traversalCallback<T> = (node: TreeNode<T>, nodesVisited: T[]) => void;
 
 /**
  * 
-> A binary search tree (or BST) is a binary tree in which each node (except leaf nodes) satisfies the
-following rules:
-- all values of the right subtree of a node must be greater than the node value itself,
-- all values of the left subtree of a node must be less than the node value itself.
-
-The leaf nodes children are null therefore we’re not applying these rules to them.
-
-| Access | Search | Insertion | Deletion | Comment |
-|-------|-------|-------|-------|-------|
-| O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) | For balanced trees |
+ * > A binary search tree (or BST) is a binary tree in which each node (except leaf nodes) satisfies the
+ * following rules:
+ * - all values of the right subtree of a node must be greater than the node value itself,
+ * - all values of the left subtree of a node must be less than the node value itself.
+ * 
+ * The leaf nodes children are null therefore we’re not applying these rules to them.
+ * 
+ * | Access | Search | Insertion | Deletion | Comment |
+ * |-------|-------|-------|-------|-------|
+ * | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) | For balanced trees |
  */
 export class BinarySearchTree<T> {
     public root: TreeNode<T>;
