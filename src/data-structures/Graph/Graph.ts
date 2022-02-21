@@ -1,3 +1,4 @@
+import { Stack } from "../Stack/Stack";
 import { Queue } from "../Queue/Queue";
 import { GraphNode } from "./GraphNode";
 
@@ -109,6 +110,23 @@ export class Graph<T> {
                 output += node.value;
                 visited.set(node.value, true)
                 node.getNeighbors().forEach((edge) => queue.enqueue(edge.node));
+            }
+        }
+        return output;
+    }
+
+    dfs(start: GraphNode<T>) {
+        const stack = new Stack<GraphNode<T>>();
+        const visited = new Map();
+        stack.push(start);
+        let output = '';
+        while (!stack.isEmpty()) {
+            const node = stack.pop();
+            while (node && !visited.has(node.value)) {
+                console.log('dfs', node.value);
+                output += node.value;
+                visited.set(node.value, true)
+                node.getNeighbors().forEach((edge) => stack.push(edge.node));
             }
         }
         return output;

@@ -45,4 +45,28 @@ describe('Graph', () => {
         graph.addEdge(3, 2);
         expect(graph.bfs(start)).toBe('054132')
     });
+
+    test('bfs 3', () => {
+        const graph = new Graph();
+        graph.addEdge(6, 5, 9);
+        graph.addEdge(6, 1, 14);
+        const [start] = graph.addEdge(5, 4, 6);
+        graph.addEdge(4, 3, 11);
+        graph.addEdge(4, 2, 15);
+        graph.addEdge(2, 1, 7);
+        graph.addEdge(2, 3, 10);
+        graph.addEdge(1, 3, 9);
+        graph.addEdge(3, 6, 2);
+        expect(graph.bfs(start)).toBe('564132')
+    });
+
+
+    test('dfs 1', () => {
+        const graph = new Graph();
+        const [start] = graph.addEdge(0, 2);
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 3);
+        graph.addEdge(2, 3);
+        expect(graph.dfs(start)).toBe('0132')
+    });
 });
