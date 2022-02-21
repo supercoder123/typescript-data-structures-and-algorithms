@@ -1,3 +1,4 @@
+import { Queue } from "../Queue/Queue";
 import { GraphNode } from "./GraphNode";
 
 export enum GraphType {
@@ -33,7 +34,7 @@ export class Graph<T> {
             destinationNode.addAdjacent(sourceNode, weight);
         }
 
-        return this;
+        return [sourceNode, destinationNode];
     }
 
     /** here add vertex has the weight param because we keep the weight of the edge  
@@ -94,6 +95,23 @@ export class Graph<T> {
             });
         }
         return Graph.type === GraphType.UNDIRECTED ? (total / 2) : total;
+    }
+
+    bfs(start: GraphNode<T>) {
+        const queue = new Queue<GraphNode<T>>();
+        const visited = new Map();
+        queue.enqueue(start);
+        let output = '';
+        while (!queue.isEmpty()) {
+            const node = queue.dequeue();
+            while (node && !visited.has(node.value)) {
+                console.log('bfs', node.value);
+                output += node.value;
+                visited.set(node.value, true)
+                node.getNeighbors().forEach((edge) => queue.enqueue(edge.node));
+            }
+        }
+        return output;
     }
 
 }
